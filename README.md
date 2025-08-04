@@ -21,8 +21,7 @@ It’s responsive, lightweight, and easy to maintain—designed to reflect both 
 
 ## Live Demo
 
-Visit the live version of the site: [YourWebsite.com](https://yourwebsite.com)  
-*(Replace with your actual domain if deployed)*
+Visit the live version of the site: avikarkhakh.com 
 
 
 Thanks for visiting!
