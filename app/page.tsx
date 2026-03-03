@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Home() {
   return (
@@ -18,11 +18,11 @@ export default function Home() {
           <a href="#about" className="font-medium text-gray-700 hover:text-blue-600">
             About
           </a>
+          <a href="#work" className="font-medium text-gray-700 hover:text-blue-600">
+            Work Exp.
+          </a>
           <a href="#projects" className="font-medium text-gray-700 hover:text-blue-600">
             Projects
-          </a>
-          <a href="#resume" className="font-medium text-gray-700 hover:text-blue-600">
-            CV
           </a>
         </div>
       </nav>
@@ -56,13 +56,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="top"
-        className="relative z-0 mt-[-80px] flex h-screen flex-col items-center justify-center bg-gray-100 px-6 text-center"
-        style={{
-          backgroundImage: `url('https://www.transparenttextures.com/patterns/triangles.png')`,
-          backgroundSize: 'cover',
-          backgroundBlendMode: 'overlay',
-          backgroundColor: '#f9f9f9', // Light background color for better text visibility
-        }}
+        className="relative z-0 mt-[-80px] flex h-screen flex-col items-center justify-center bg-white px-6 text-center"
       >
         <h1 className="mb-6 text-6xl font-extrabold text-black md:text-7xl">
           Hi! I'm Avikar Khakh
@@ -72,7 +66,7 @@ export default function Home() {
           the future of fintech, and turning ideas into practical tools.
         </p>
         <a
-          href="#projects"
+          href="#personal-projects"
           className="rounded-lg bg-blue-500 px-10 py-4 text-lg font-semibold text-white shadow-md transition hover:bg-blue-600"
         >
           Projects
@@ -104,12 +98,15 @@ export default function Home() {
             <div className="text-left">
               <h3 className="mb-6 text-4xl font-extrabold text-blue-500">About Me</h3>
               <p className="text-justify text-lg text-gray-700">
-                I'm a rising senior studying Computer Science and Economics at Wake Forest
-                University. Outside of class, I serve as President of our Robotics Club and build
-                side projects that blend code with creativity. I'm especially interested in how
-                technology intersects with finance, automation, and real-world impact. Whether it’s
-                collaborating on software engineering projects or diving deep into data analysis,
-                I’m always looking to grow, contribute, and make a difference.
+                I’m a senior studying Computer Science and Economics at Wake Forest University
+                focused on building intelligent and scalable software systems. My work sits at the
+                intersection of machine learning, finance, cloud engineering, and automation. I
+                design and implement end to end projects including data pipelines, backend
+                services, interactive frontends, and simulation engines. I actively integrate AI
+                copilots such as GPT and Claude into my workflow to accelerate prototyping,
+                strengthen architecture decisions, and continuously sharpen my engineering
+                judgment. I am driven by solving complex real world problems with clean systems
+                thinking and practical execution.
               </p>
             </div>
 
@@ -120,24 +117,23 @@ export default function Home() {
               </h3>
               <div className="flex flex-wrap justify-center gap-4 md:justify-start">
                 {[
-                  'Python',
-                  'Java',
-                  'C',
-                  'JavaScript',
-                  'R',
-                  'Bash',
-                  'HTML/CSS',
-                  'React',
-                  'Next.js',
-                  'Tailwind CSS',
-                  'Spring Boot',
-                  'Kafka',
-                  'GitHub',
-                  'Unix/Linux',
-                  'VS Code',
-                  'Data Structures',
-                  'Algorithms',
-                  'IntelliJ',
+                  "Python",
+                  "Java",
+                  "C",
+                  "JavaScript",
+                  "React",
+                  "Next.js",
+                  "Angular",
+                  "Spring Boot",
+                  "Apache Kafka",
+                  "scikit-learn",
+                  "Pandas",
+                  "SQL",
+                  "Unix/Linux",
+                  "Microsoft Azure OpenAI",
+                  "GitHub",
+                  "VS Code",
+                  "IntelliJ",
                 ].map((skill) => (
                   <span
                     key={skill}
@@ -159,16 +155,17 @@ export default function Home() {
         </h2>
         <ul className="mx-auto max-w-3xl list-inside list-disc space-y-4 text-lg text-gray-700 marker:text-red-500">
           <li>
-            Exploring cloud engineering, backend/frontend development, and data science through
-            hands-on projects and virtual internships
+            Deepening expertise in cloud engineering, full-stack development, and data science
+            through production-style projects and applied virtual internships
           </li>
           <li>
-            Leading Wake Forest’s Robotics Club and mentoring members on autonomous systems and
-            programming
+            Building AI-driven tools and simulations that blend machine learning, finance, and
+            automation—translating technical concepts into working, deployable systems
           </li>
           <li>
-            Building side projects that blend AI, finance, and automation—trying to turn late-night
-            ideas into working prototypes
+            Leveraging AI copilots such as Claude and GPT as part of my development workflow to
+            accelerate prototyping, improve code quality, and continuously refine my understanding
+            of modern software systems
           </li>
         </ul>
       </section>
@@ -181,77 +178,107 @@ export default function Home() {
       </div>
 
       {/* Projects Section */}
+      <section id="work" className="bg-white px-6 py-10 md:px-24">
+        <h2 className="mb-16 rounded-lg bg-blue-500 px-10 py-4 text-center text-lg font-semibold text-white shadow-md transition hover:bg-blue-600">
+          Work Experiences
+        </h2>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* NYC Administration for Children’s Services (ACS), Software Development Intern */}
+          <div className="rounded-lg border p-6 shadow transition hover:shadow-lg">
+            <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
+              NYC ACS Software Development Intern
+            </h3>
+            <p className="text-center text-sm text-gray-700">
+              Interned with NYC Administration for Children’s Services (ACS) on their Office of
+              Information Technology team
+            </p>
+            <ul className="mt-4 list-inside list-disc text-sm text-gray-700">
+              <li>
+                Built and optimized an internal chatbot platform by integrating Azure OpenAI into a
+                Spring Boot backend with retrieval-augmented generation (RAG).
+              </li>
+              <li>
+                Enhanced Angular frontend components to boost responsiveness and cut load times by
+                1.2s.
+              </li>
+              <li>Designed and tested UX-driven features that reduced navigation errors by 15%.</li>
+              <li>
+                Blended full-stack development, LLM integration, and performance optimization to
+                improve workflows for 200+ internal staff.
+              </li>
+            </ul>
+          </div>
+
+          {/* JPMC Software Engineering Micro-Internship */}
+          <div className="rounded-lg border p-6 shadow transition hover:shadow-lg">
+            <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
+              JP Morgan Software Engineering Micro-Internship
+            </h3>
+
+            <p className="text-center text-sm text-gray-700">
+              Completed a Virtual Micro-Internship with JP Morgan Chase & Co., simulating a software
+              engineering role
+            </p>
+
+            <ul className="mt-4 list-inside list-disc text-sm text-gray-700">
+              <li>Completed a virtual micro-internship simulating a software engineering role</li>
+              <li>
+                Set up a Spring Boot backend and integrated Apache Kafka for streaming transactions
+              </li>
+              <li>Debugged asynchronous data flow to ensure reliable event processing</li>
+              <li>
+                Hands-on dive into enterprise software engineering, scalable systems, and modern
+                fintech infrastructure
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section id="projects" className="bg-white px-6 py-10 md:px-24">
         <h2 className="mb-16 rounded-lg bg-blue-500 px-10 py-4 text-center text-lg font-semibold text-white shadow-md transition hover:bg-blue-600">
           Personal Projects
         </h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {/* JPMC Software Engineering Micro-Internship */}
-          <div className="rounded-lg border p-6 shadow transition hover:shadow-lg">
-            <h3 className="mb-4 text-center text-xl font-bold">JP Morgan SWE Micro-Internship</h3>
-            <p className="text-center text-sm text-gray-700">
-              Completed a virtual micro-internship through Forage simulating a role at JPMorgan
-              Chase. Tackled real-world challenges like setting up a Spring Boot backend,
-              integrating Apache Kafka for streaming transactions, and debugging async data flow. A
-              hands-on dive into enterprise software engineering, scalable systems, and modern
-              fintech infrastructure.
-            </p>
-          </div>
-
           {/* XRP Autonomous Robot */}
           <div className="rounded-lg border p-6 shadow transition hover:shadow-lg">
-            <h3 className="mb-4 text-center text-xl font-bold">XRP Autonomous Robot</h3>
+            <h2 className="mb-4 text-center text-xl font-bold text-gray-800">
+              XRP Autonomous Robot
+            </h2>
             <p className="text-center text-sm text-gray-700">
-              Engineered an autonomous XRP robot using Python, sensor integration, and
-              line-following algorithms. As President of the Robotics Club, I took a lead role in
-              the project by guiding technical decisions, coordinating tasks, and teaching newer
-              members how to build and program the robot. It was like giving a Roomba a brain—and a
-              mission, powered by embedded systems and real-time decision making.
+              Engineered an autonomous XRP robot in Python with sensor integration and a
+              line-following control loop. As President of the Robotics Club, I led technical
+              decisions, coordinated build/testing, and mentored newer members through wiring,
+              calibration, and debugging. The result is a small “brains-on-wheels” system that
+              makes real-time decisions from sensor input and reliably navigates a course.
             </p>
           </div>
 
-          {/* Portfolio Website */}
           <div className="rounded-lg border p-6 shadow transition hover:shadow-lg">
-            <h3 className="mb-4 text-center text-xl font-bold">Portfolio Website</h3>
+            <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
+              NHL Machine Learning Forecast Engine
+            </h3>
             <p className="text-center text-sm text-gray-700">
-              Designed and developed from the ground up using Next.js, Tailwind CSS, and React
-              Icons. This site highlights my frontend skills, personal brand, and attention to clean
-              design. It is fully responsive, easy to maintain, and built to grow alongside my
-              portfolio. Think of it as my digital handshake that is clean, functional, and just a
-              little nerdy in the best way.{' '}
+              Built an end-to-end machine learning pipeline to forecast NHL team performance and
+              generate projected standings. Aggregated and cleaned team metrics, engineered
+              features from advanced stats, trained regression models, and evaluated performance
+              with standard metrics. Designed the project to support season simulations and future
+              deployment to a web dashboard.
             </p>
           </div>
 
-          {/* Authoring Assistant in Java */}
           <div className="rounded-lg border p-6 shadow transition hover:shadow-lg">
-            <h3 className="mb-4 text-center text-xl font-bold">Authoring Assistant in Java</h3>
+            <h4 className="mb-4 text-center text-xl font-bold text-gray-800">
+              Investment Strategy Simulator
+            </h4>
             <p className="text-center text-sm text-gray-700">
-              Built a Java based authoring tool that lets users format text with ease using
-              ArrayLists and StringBuilder under the hood. It supports live preview and real time
-              editing for inputs up to 1,500 characters, making it perfect for quick drafts,
-              structured writing, and experimenting with creative ideas on the fly.
+              Developed a backtesting simulator that lets users compare portfolio strategies over
+              historical market data. Users can input tickers, configure assumptions (starting
+              capital, rebalancing, allocations), and run simulations that output performance and a
+              clear narrative of what happened. Built with a clean separation between data
+              ingestion, strategy logic, and results so it’s easy to extend to a frontend UI.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Resume Section */}
-      <section id="resume" className="bg-gray-100 px-6 py-10 md:px-24">
-        <h2 className="mb-16 rounded-lg bg-blue-500 px-10 py-4 text-center text-lg font-semibold text-white shadow-md transition hover:bg-blue-600">
-          Resume / CV
-        </h2>
-        <div className="flex flex-col items-center">
-          <p className="mb-6 text-center text-lg text-gray-700">
-            Interested in learning more about my experience and skills? Download my resume below!
-          </p>
-          <a
-            href="/Avikar_Khakh_Resume copy.docx.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg bg-red-500 px-10 py-4 text-lg font-semibold text-white shadow-md transition hover:bg-red-600"
-          >
-            Download Resume
-          </a>
         </div>
       </section>
 
@@ -262,5 +289,5 @@ export default function Home() {
         </a>
       </div>
     </div>
-  )
+  );
 }
