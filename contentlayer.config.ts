@@ -1,5 +1,5 @@
 import { defineDocumentType, ComputedFields, makeSource } from "contentlayer2/source-files";
-import { writeFileSync } from "fs";
+import { existsSync, writeFileSync } from "fs";
 import readingTime from "reading-time";
 import { slug } from "github-slugger";
 import path from "path";
@@ -149,6 +149,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "data",
+  contentlayerOutputDir: ".contentlayer",
   documentTypes: [Blog, Authors],
   mdx: {
     cwd: process.cwd(),
@@ -180,8 +181,26 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs } = await importData();
-    createTagCount(allBlogs);
-    createSearchIndex(allBlogs);
+    try {
+      const { allBlogs } = await importData();
+      createTagCount(allBlogs);
+      createSearchIndex(allBlogs);
+    } catch (error) {
+      // In fresh CI builds the generated index can be missing during onSuccess.
+      // Ensure downstream imports don't fail hard.
+      if (!existsSync("./app/tag-data.json")) {
+        writeFileSync("./app/tag-data.json", "{}");
+      }
+      if (
+        siteMetadata?.search?.provider === "kbar" &&
+        siteMetadata.search.kbarConfig.searchDocumentsPath
+      ) {
+        const searchPath = `public/${path.basename(siteMetadata.search.kbarConfig.searchDocumentsPath)}`;
+        if (!existsSync(searchPath)) {
+          writeFileSync(searchPath, "[]");
+        }
+      }
+      console.warn("Contentlayer onSuccess skipped:", error);
+    }
   },
 });
