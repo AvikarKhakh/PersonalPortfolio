@@ -1,0 +1,90 @@
+/* Minimal Prism styles for rehype-prism-plus. Customize as needed. */
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #e6e6e6;
+  background: #0f172a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+pre[class*="language-"] {
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow: auto;
+  border-radius: 0.5rem;
+}
+
+/* Line numbers and highlights */
+.code-line {
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 2rem;
+  margin-left: -2.5rem;
+  text-align: right;
+  color: #64748b;
+  content: attr(line);
+}
+
+.highlight-line {
+  background: rgba(148, 163, 184, 0.15);
+  border-left: 2px solid #94a3b8;
+}
+
+/* Token colors */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #64748b;
+}
+
+.token.punctuation {
+  color: #94a3b8;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f97316;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #22c55e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable,
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #38bdf8;
+}
+
+.token.keyword {
+  color: #c084fc;
+}
+
+.token.regex,
+.token.important {
+  color: #facc15;
+}
