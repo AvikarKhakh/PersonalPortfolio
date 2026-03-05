@@ -1,1 +1,6 @@
 node_modules
+.next
+.contentlayer
+.env*.local
+app/tag-data.json
+public/search.json
