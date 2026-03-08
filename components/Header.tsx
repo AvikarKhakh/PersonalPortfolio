@@ -5,9 +5,10 @@ import MobileNav from "./MobileNav";
 import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
-  let headerClass = "flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10";
+  let headerClass =
+    "flex items-center w-full bg-white/80 backdrop-blur-md dark:bg-gray-950/80 justify-between py-6 px-2";
   if (siteMetadata.stickyNav) {
-    headerClass += " sticky top-0 z-50";
+    headerClass += " sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-800/50";
   }
 
   return (

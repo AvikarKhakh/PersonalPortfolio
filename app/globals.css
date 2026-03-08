@@ -1,3 +1,8 @@
 body {
   background-color: #ffffff;
 }
+
+.dark body,
+:where(.dark) body {
+  background-color: oklch(0.13 0.028 261.692);
+}

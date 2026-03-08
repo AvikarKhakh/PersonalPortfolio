@@ -7,20 +7,19 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: "A Search Engine",
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: "/static/images/google.png",
-    href: "https://www.google.com",
+    title: "XRP Robotics",
+    description: `Led the design and deployment of autonomous robotic systems using Python, implementing sensor-driven navigation and obstacle detection. Improved accuracy by 30% through iterative testing and tuning.`,
+    href: "https://github.com/AvikarKhakh/vision_control_xrp_functions",
   },
   {
-    title: "The Time Machine",
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten headphones with this simple yet affordable solution.`,
-    imgSrc: "/static/images/time-machine.jpg",
-    href: "/blog/the-time-machine",
+    title: "NHL Team Points Prediction",
+    description: `Built an end-to-end machine learning pipeline using Python and Random Forest regression to forecast NHL team point totals, translating advanced performance data into actionable insights.`,
+    href: "https://github.com/AvikarKhakh/nhl-standings-ML-model-dashboard",
+  },
+  {
+    title: "Investment Strategy Simulator",
+    description: `Developed a backtesting simulator that lets users compare portfolio strategies over historical market data with configurable assumptions and clear performance narratives.`,
+    href: "https://github.com/AvikarKhakh/portfolio-stategy-simulator",
   },
 ];
 
