@@ -21,6 +21,11 @@ const projectsData: Project[] = [
     description: `Developed a backtesting simulator that lets users compare portfolio strategies over historical market data with configurable assumptions and clear performance narratives.`,
     href: "https://github.com/AvikarKhakh/portfolio-stategy-simulator",
   },
+  {
+    title: "NBA Statistical Query Engine",
+    description: `Built a natural language-to-SQL web app using React, FastAPI, and Llama 3.3 70B that lets users query 9 seasons of NBA data through plain English, returning interactive tables and auto-generated visualizations.`,
+    href: "https://github.com/AvikarKhakh/nba-SQL-engine",
+  },
 ];
 
 export default projectsData;

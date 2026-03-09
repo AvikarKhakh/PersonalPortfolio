@@ -280,6 +280,30 @@ export default function Home() {
               View on GitHub
             </a>
           </div>
+
+          {/* NBA Statistical Query Engine */}
+          <div className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
+            <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-100">
+              NBA Statistical Query Engine
+            </h3>
+            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-blue-500 dark:text-blue-400">
+              React &middot; FastAPI &middot; Llama 3.3 70B &middot; SQLite
+            </p>
+            <p className="flex-1 text-base text-gray-600 dark:text-gray-400">
+              Built a natural language-to-SQL web app that lets users query 9 seasons of NBA data
+              through plain English, returning interactive tables and auto-generated visualizations
+              powered by Llama 3.3 70B via Groq.
+            </p>
+            <a
+              href="https://github.com/AvikarKhakh/nba-SQL-engine"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-800 transition hover:text-black dark:text-gray-300 dark:hover:text-white"
+            >
+              <FaGithub />
+              View on GitHub
+            </a>
+          </div>
         </div>
       </section>
 
