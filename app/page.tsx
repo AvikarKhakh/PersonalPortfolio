@@ -1,61 +1,232 @@
-import Image from "next/image";
-import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt, FaChevronUp } from "react-icons/fa";
+"use client";
 
-const skills = {
-  Languages: ["Java", "Python", "C", "JavaScript"],
-  "Frameworks & Libraries": ["Spring Boot", "Angular", "React", "Tailwind CSS"],
-  "Cloud Platforms": ["Microsoft Azure", "Azure OpenAI", "Cosmos DB"],
-  "Data & Tools": ["SQL", "R / RStudio", "Apache Kafka", "Maven"],
-  "Integration & Collaboration": ["Git", "GitHub", "REST APIs"],
+import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt, FaArrowRight } from "react-icons/fa";
+import { ReactNode } from "react";
+
+/* ─── Types ────────────────────────────────────────────────────────── */
+
+interface ExperienceEntry {
+  company: string;
+  role: string;
+  location: string;
+  date: string;
+  bullets: { id: string; content: ReactNode }[];
+}
+
+interface ProjectEntry {
+  title: string;
+  tech: string;
+  description: string;
+  href: string;
+}
+
+/* ─── Data ─────────────────────────────────────────────────────────── */
+
+const skills: Record<string, string[]> = {
+  Languages: ["Python", "Swift", "JavaScript", "TypeScript", "Java", "C", "SQL"],
+  "Frameworks & Tools": [
+    "React", "SwiftUI", "FastAPI", "Angular", "Tailwind CSS",
+    "Docker", "PostgreSQL", "Git", "GitHub", "pytest",
+  ],
+  "AI / ML": [
+    "RAG Pipelines", "Azure OpenAI", "scikit-learn", "cvxpy",
+    "pandas", "Agentic Workflows",
+  ],
 };
 
-export default function Home() {
+const experience: ExperienceEntry[] = [
+  {
+    company: "Steward",
+    role: "Software Engineer",
+    location: "Winston-Salem, NC",
+    date: "2025 \u2013 Present",
+    bullets: [
+      { id: "steward-ios", content: <>Sole engineer for a <strong>WFU StartUp Lab-backed</strong> fintech startup (<strong>1 of 9</strong> selected), building a full-stack iOS app that recommends the optimal credit card at every merchant using real-time location</> },
+      { id: "steward-engine", content: <>Developed a recommendation engine scoring cards across <strong>6 reward dimensions</strong> with fuzzy merchant name matching for accurate category detection</> },
+      { id: "steward-scrapers", content: <>Engineered automated scrapers for <strong>8 major card issuers</strong> that refresh offer data daily, plus a three-layer merchant cache that reduced Google Places API calls by <strong>90%</strong></> },
+    ],
+  },
+  {
+    company: "NYC Administration for Children\u2019s Services",
+    role: "Software Development Intern",
+    location: "New York, NY",
+    date: "Summer 2025",
+    bullets: [
+      { id: "acs-rag", content: <>Designed and deployed an <strong>AI-powered</strong> knowledge search system using <strong>Azure OpenAI</strong> and <strong>RAG</strong> across agency documents for <strong>200+ staff</strong></> },
+      { id: "acs-angular", content: <>Enhanced <strong>Angular</strong> frontend components and optimized backend API endpoints, improving UI responsiveness by <strong>30%</strong>, reducing page load times by <strong>1.2s</strong></> },
+      { id: "acs-stakeholders", content: <>Gathered requirements from non-technical stakeholders, translated business needs into code, and shipped enhancements that reduced query response times by <strong>15%</strong></> },
+    ],
+  },
+];
+
+const projects: ProjectEntry[] = [
+  {
+    title: "Portfolio Strategy Simulator",
+    tech: "Python \u00b7 FastAPI \u00b7 React \u00b7 cvxpy",
+    description: "Full-stack portfolio optimization tool with configurable constraints for volatility, turnover, and tracking error. Features a backtesting engine with automatic constraint relaxation and an interactive React dashboard.",
+    href: "https://github.com/AvikarKhakh/portfolio-stategy-simulator",
+  },
+  {
+    title: "NBA Statistical Query Engine",
+    tech: "React \u00b7 FastAPI \u00b7 Llama 3.3 70B \u00b7 SQLite",
+    description: "Natural language-to-SQL web app that lets users query 9 seasons of NBA data through plain English, returning interactive tables and auto-generated visualizations powered by Llama 3.3 70B via Groq.",
+    href: "https://github.com/AvikarKhakh/nba-SQL-engine",
+  },
+  {
+    title: "XRP Robotics",
+    tech: "Python \u00b7 Sensor Integration \u00b7 Control Systems",
+    description: "Led the design and deployment of autonomous robotic systems using Python, implementing sensor-driven navigation and obstacle detection. Improved accuracy by 30% through iterative testing and tuning.",
+    href: "https://github.com/AvikarKhakh/vision_control_xrp_functions",
+  },
+  {
+    title: "NHL Team Points Prediction",
+    tech: "Python \u00b7 scikit-learn \u00b7 Random Forest",
+    description: "End-to-end machine learning pipeline using Python and Random Forest regression to forecast NHL team point totals, translating advanced performance data into actionable insights.",
+    href: "https://github.com/AvikarKhakh/nhl-standings-ML-model-dashboard",
+  },
+];
+
+/* ─── Animation Variants ───────────────────────────────────────────── */
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.7, delay: i * 0.1, ease },
+  }),
+};
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
+const itemFade = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+};
+
+/* ─── Section Heading Component ────────────────────────────────────── */
+
+function SectionHeading({ label, number }: { label: string; number: string }) {
   return (
-    <div>
-      {/* Hero Section */}
-      <section
-        id="top"
-        className="flex flex-col items-center justify-center px-6 py-24 text-center md:py-36"
-      >
-        <Image
-          src="/static/images/avatar.jpeg"
-          alt="Avikar Khakh"
-          width={160}
-          height={160}
-          className="mb-8 h-40 w-40 rounded-full object-cover shadow-lg"
-          priority
-        />
-        <h1 className="mb-6 text-5xl font-extrabold text-gray-900 md:text-7xl dark:text-gray-100">
-          Hi! I'm Avikar Khakh
-        </h1>
-        <p className="mb-8 max-w-2xl text-xl text-gray-600 md:text-2xl dark:text-gray-300">
-          I'm a tech-driven problem solver with a passion for building impactful software, delivering
-          real business value, and turning ideas into tools that serve real user needs.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
+    <motion.div
+      className="mb-16 flex items-center gap-4"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      custom={0}
+    >
+      <span className="font-mono text-sm text-[#e8b931]/60">{number}</span>
+      <h2 className="section-label text-3xl italic text-[#f0ece2] md:text-4xl">
+        {label}
+      </h2>
+      <div className="h-px flex-1 bg-gradient-to-r from-[#e8b931]/20 to-transparent" />
+    </motion.div>
+  );
+}
+
+/* ─── Page ─────────────────────────────────────────────────────────── */
+
+export default function Home() {
+  const prefersReducedMotion = useReducedMotion();
+  const motionProps = prefersReducedMotion
+    ? { initial: undefined, animate: undefined, whileInView: undefined }
+    : {};
+
+  return (
+    <div className="relative">
+      {/* Grain overlay */}
+      <div className="grain-overlay" />
+
+      {/* Background orbs */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="orb-1 absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-[#e8b931]/[0.04] blur-[120px]" />
+        <div className="orb-2 absolute -bottom-48 -left-48 h-[600px] w-[600px] rounded-full bg-[#f4845f]/[0.03] blur-[140px]" />
+        <div className="orb-3 absolute right-1/4 top-1/2 h-[400px] w-[400px] rounded-full bg-[#e8b931]/[0.02] blur-[100px]" />
+      </div>
+
+      {/* ════════════ HERO ════════════ */}
+      <section id="top" className="relative flex min-h-[85vh] flex-col items-center justify-center px-6 py-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease }}
+        >
+          <div className="avatar-ring mx-auto mb-10 h-36 w-36 overflow-hidden rounded-full">
+            <Image
+              src="/static/images/avatar.jpeg"
+              alt="Avikar Khakh"
+              width={160}
+              height={160}
+              className="h-full w-full object-cover"
+              priority
+            />
+          </div>
+        </motion.div>
+
+        <motion.h1
+          className="mb-6 text-5xl font-light tracking-tight md:text-7xl lg:text-8xl"
+          style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease }}
+        >
+          <span className="text-[#f0ece2]">Avikar </span>
+          <span className="gradient-text-animated italic">Khakh</span>
+        </motion.h1>
+
+        <motion.p
+          className="mb-10 max-w-xl text-lg leading-relaxed text-[#8a8a9a] md:text-xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease }}
+        >
+          Developer experienced in full-stack development, AI-powered systems,
+          and native mobile. Translating business needs into products that deliver
+          real impact.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.55, ease }}
+        >
           <a
             href="#projects"
-            className="rounded-lg bg-blue-500 px-8 py-3 text-lg font-semibold text-white shadow-md transition hover:bg-blue-600"
+            className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-[#e8b931] to-[#f4845f] px-7 py-3 text-sm font-semibold text-[#08080c] shadow-lg shadow-[#e8b931]/20 transition-all duration-300 hover:shadow-xl hover:shadow-[#e8b931]/30"
           >
             View Projects
+            <FaArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </a>
           <a
             href="/Avikar_Khakh_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-lg border-2 border-blue-500 px-8 py-3 text-lg font-semibold text-blue-500 shadow-md transition hover:bg-blue-500 hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white"
+            className="flex items-center gap-2 rounded-full border border-[#f0ece2]/20 px-7 py-3 text-sm font-semibold text-[#f0ece2] transition-all duration-300 hover:border-[#e8b931]/40 hover:text-[#e8b931]"
           >
-            <FaFileAlt />
+            <FaFileAlt className="text-xs" aria-hidden="true" />
             Resume
           </a>
-        </div>
-        {/* Social Links */}
-        <div className="mt-8 flex items-center gap-6 text-3xl">
+        </motion.div>
+
+        {/* Social links */}
+        <motion.div
+          className="mt-12 flex items-center gap-5 text-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.7, ease }}
+        >
           <a
             href="https://www.linkedin.com/in/avikar-khakh/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 transition-transform hover:scale-110 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+            className="text-[#5a5a6a] transition-all duration-300 hover:text-[#e8b931]"
             aria-label="LinkedIn"
           >
             <FaLinkedin />
@@ -64,257 +235,278 @@ export default function Home() {
             href="https://github.com/AvikarKhakh"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-800 transition-transform hover:scale-110 hover:text-black dark:text-gray-300 dark:hover:text-white"
+            className="text-[#5a5a6a] transition-all duration-300 hover:text-[#e8b931]"
             aria-label="GitHub"
           >
             <FaGithub />
           </a>
           <a
             href="mailto:avikarkhakh@gmail.com"
-            className="text-red-500 transition-transform hover:scale-110 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300"
+            className="text-[#5a5a6a] transition-all duration-300 hover:text-[#e8b931]"
             aria-label="Email"
           >
             <FaEnvelope />
           </a>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          <motion.div
+            className="h-8 w-5 rounded-full border border-[#f0ece2]/20"
+            animate={{ opacity: [0.3, 0.7, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <motion.div
+              className="mx-auto mt-1.5 h-1.5 w-1 rounded-full bg-[#e8b931]/60"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ════════════ ABOUT + SKILLS ════════════ */}
+      <section id="about" className="relative px-6 py-24 md:px-0">
+        <SectionHeading label="About" number="01" />
+
+        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-5">
+          {/* About text */}
+          <motion.div
+            className="lg:col-span-2"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            custom={1}
+          >
+            <p className="text-lg leading-relaxed text-[#8a8a9a]">
+              I&apos;m a Computer Science and Economics senior at Wake Forest University
+              experienced in full-stack development, AI-powered systems, and native mobile.
+              I leverage agentic AI to accelerate development and translate business needs
+              into working products.
+            </p>
+            <p className="mt-5 text-lg leading-relaxed text-[#8a8a9a]">
+              I design and implement end-to-end projects including iOS apps, recommendation
+              engines, backend services, interactive frontends, and simulation engines.
+              Driven by solving real-world problems with clean systems thinking.
+            </p>
+          </motion.div>
+
+          {/* Skills */}
+          <motion.div
+            className="lg:col-span-3"
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            {Object.entries(skills).map(([category, items]) => (
+              <motion.div key={category} className="mb-6" variants={itemFade}>
+                <h4 className="mb-3 font-mono text-xs uppercase tracking-widest text-[#e8b931]/70">
+                  {category}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="skill-pill rounded-full px-3.5 py-1.5 text-sm text-[#b0ada5]"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="bg-gray-50 px-6 py-20 md:px-24 dark:bg-gray-900">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-12 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-            About Me
-          </h2>
-          <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2">
-            <div className="text-left">
-              <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                I'm a Computer Science and Economics senior at Wake Forest University with
-                experience building AI-powered, cloud-based applications and leading technical
-                teams. I have a strong background in software engineering, machine learning, and
-                translating technical solutions into real business impact.
-              </p>
-              <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                I design and implement end-to-end projects including data pipelines, backend
-                services, interactive frontends, and simulation engines. I am driven by solving
-                complex real-world problems with clean systems thinking and practical execution.
-              </p>
-            </div>
+      {/* ════════════ EXPERIENCE (Timeline) ════════════ */}
+      <section id="work" className="relative px-6 py-24 md:px-0">
+        <SectionHeading label="Experience" number="02" />
 
-            {/* Skills Section - Categorized */}
-            <div>
-              <h3 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
-                Technical Skills
-              </h3>
-              <div className="space-y-4">
-                {Object.entries(skills).map(([category, items]) => (
-                  <div key={category}>
-                    <h4 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      {category}
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {items.map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-lg bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+        <div className="relative ml-4 pl-8 md:ml-8 md:pl-12">
+          <div className="timeline-line" />
+
+          {experience.map((job, i) => (
+            <motion.div
+              key={job.company}
+              className="relative mb-14 last:mb-0"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              custom={i}
+            >
+              <div className="timeline-dot" />
+
+              <div className="glow-card rounded-xl p-6 md:p-8">
+                <div className="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline">
+                  <h3
+                    className="text-xl text-[#f0ece2] md:text-2xl"
+                    style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
+                  >
+                    {job.company}
+                  </h3>
+                  <span className="shrink-0 font-mono text-xs text-[#e8b931]/70">
+                    {job.date}
+                  </span>
+                </div>
+                <p className="mb-5 text-sm text-[#5a5a6a]">
+                  {job.role} &middot; {job.location}
+                </p>
+                <ul className="space-y-3">
+                  {job.bullets.map((bullet) => (
+                    <li key={bullet.id} className="flex gap-3 text-[15px] leading-relaxed text-[#8a8a9a]">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#e8b931]/50" />
+                      <span>{bullet.content}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Work Experience Section */}
-      <section id="work" className="px-6 py-20 md:px-24">
-        <h2 className="mb-12 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-          Work Experience
-        </h2>
-        <div className="mx-auto max-w-5xl space-y-8">
-          {/* NYC ACS */}
-          <div className="rounded-lg border border-gray-200 bg-white p-8 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
-            <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                NYC Administration for Children's Services (ACS)
-              </h3>
-              <span className="shrink-0 text-sm font-medium text-blue-500 dark:text-blue-400">
-                Summer 2025
+      {/* ════════════ PROJECTS ════════════ */}
+      <section id="projects" className="relative px-6 py-24 md:px-0">
+        <SectionHeading label="Projects" number="03" />
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {projects.map((project, i) => (
+            <motion.a
+              key={project.title}
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glow-card group block rounded-xl p-6 md:p-8"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
+              custom={i}
+            >
+              <div className="mb-3 flex items-start justify-between">
+                <h3
+                  className="text-xl text-[#f0ece2] md:text-2xl"
+                  style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
+                >
+                  {project.title}
+                </h3>
+                <FaGithub className="mt-1 shrink-0 text-lg text-[#5a5a6a] transition-all duration-300 group-hover:text-[#e8b931]" aria-hidden="true" />
+              </div>
+              <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[#e8b931]/60">
+                {project.tech}
+              </p>
+              <p className="text-[15px] leading-relaxed text-[#8a8a9a]">
+                {project.description}
+              </p>
+              <div className="mt-5 flex items-center gap-1.5 text-sm text-[#5a5a6a] transition-all duration-300 group-hover:text-[#e8b931]">
+                <span>View on GitHub</span>
+                <FaArrowRight className="text-[10px] transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </section>
+
+      {/* ════════════ LEADERSHIP ════════════ */}
+      <section id="leadership" className="relative px-6 py-24 md:px-0">
+        <SectionHeading label="Leadership" number="04" />
+
+        <motion.div
+          className="glow-card rounded-xl p-6 md:p-8"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          custom={0}
+        >
+          <div className="mb-3 flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline">
+            <h3
+              className="text-xl text-[#f0ece2] md:text-2xl"
+              style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
+            >
+              Wake Forest University Robotics Organization
+            </h3>
+            <span className="shrink-0 font-mono text-xs text-[#e8b931]/70">
+              Fall 2024 &ndash; Present
+            </span>
+          </div>
+          <p className="mb-5 text-sm text-[#5a5a6a]">
+            President &middot; Winston-Salem, NC
+          </p>
+          <ul className="space-y-3">
+            <li className="flex gap-3 text-[15px] leading-relaxed text-[#8a8a9a]">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#e8b931]/50" />
+              <span>
+                Scaled the organization from <strong>3 to 20+</strong> active members through
+                hands-on project-based learning and robotics competitions, and grew funding from{" "}
+                <strong>$300 to $1,100</strong> by presenting to faculty and the student
+                budgeting office
               </span>
-            </div>
-            <p className="mb-4 text-base font-medium text-gray-500 dark:text-gray-400">
-              Software Development Intern &middot; New York, NY
-            </p>
-            <ul className="list-inside list-disc space-y-2 text-base text-gray-700 dark:text-gray-300">
-              <li>
-                Designed and implemented an <strong>AI-powered</strong> internal knowledge search
-                system by integrating <strong>Azure OpenAI</strong> into backend APIs, enabling
-                secure <strong>RAG</strong> across agency documents
-              </li>
-              <li>
-                Enhanced <strong>Angular</strong> frontend components to improve UI responsiveness
-                by <strong>30%</strong> and reduce average page load times by{" "}
-                <strong>1.2s</strong> for 200+ internal staff
-              </li>
-              <li>
-                Translated employee feedback into user-facing feature enhancements, reducing
-                navigation errors by <strong>15%</strong> and improving caseworker task completion
-                speed
-              </li>
-              <li>
-                Optimized backend <strong>API endpoints</strong>, reducing query response times by{" "}
-                <strong>15%</strong> and improving scalability
-              </li>
-            </ul>
-          </div>
-
-          {/* JPMorgan */}
-          <div className="rounded-lg border border-gray-200 bg-white p-8 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
-            <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
-              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                JPMorgan Chase & Co.
-              </h3>
-              <span className="shrink-0 text-sm font-medium text-blue-500 dark:text-blue-400">
-                Spring 2025
+            </li>
+            <li className="flex gap-3 text-[15px] leading-relaxed text-[#8a8a9a]">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#e8b931]/50" />
+              <span>
+                Partnered with the CS department to establish a{" "}
+                <strong>1.5-credit robotics course</strong> built on the club&apos;s curriculum
+                and competition work
               </span>
-            </div>
-            <p className="mb-4 text-base font-medium text-gray-500 dark:text-gray-400">
-              Software Engineering (Forage) &middot; Remote
-            </p>
-            <ul className="list-inside list-disc space-y-2 text-base text-gray-700 dark:text-gray-300">
-              <li>
-                Strengthened backend reliability in a <strong>Spring Boot</strong> microservices
-                architecture by completing a multi-stage enterprise banking simulation aligned with
-                production workflows
-              </li>
-              <li>
-                Eliminated transaction processing errors by integrating{" "}
-                <strong>Apache Kafka</strong> to stream and deserialize <strong>500+</strong> mock
-                financial transactions in real time
-              </li>
-              <li>
-                Reduced transaction latency by <strong>25%</strong> by restructuring service logic
-                and optimizing <strong>Kafka consumer modules</strong>
-              </li>
-            </ul>
-          </div>
-        </div>
+            </li>
+          </ul>
+        </motion.div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="bg-gray-50 px-6 py-20 md:px-24 dark:bg-gray-900">
-        <h2 className="mb-12 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
-          Projects
-        </h2>
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* XRP Robotics */}
-          <div className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
-            <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-100">
-              XRP Robotics
-            </h3>
-            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-blue-500 dark:text-blue-400">
-              Python &middot; Sensor Integration &middot; Control Systems
-            </p>
-            <p className="flex-1 text-base text-gray-600 dark:text-gray-400">
-              Led the design and deployment of autonomous robotic systems using Python, implementing
-              sensor-driven navigation and obstacle detection. Improved accuracy by 30% through
-              iterative testing and tuning.
-            </p>
-            <a
-              href="https://github.com/AvikarKhakh/vision_control_xrp_functions"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-800 transition hover:text-black dark:text-gray-300 dark:hover:text-white"
-            >
-              <FaGithub />
-              View on GitHub
-            </a>
-          </div>
+      {/* ════════════ EDUCATION ════════════ */}
+      <section id="education" className="relative px-6 py-24 md:px-0">
+        <SectionHeading label="Education" number="05" />
 
-          {/* NHL Prediction */}
-          <div className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
-            <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-100">
-              NHL Team Points Prediction
-            </h3>
-            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-blue-500 dark:text-blue-400">
-              Python &middot; scikit-learn &middot; Random Forest
-            </p>
-            <p className="flex-1 text-base text-gray-600 dark:text-gray-400">
-              Built an end-to-end machine learning pipeline using Python and Random Forest
-              regression to forecast NHL team point totals, translating advanced performance data
-              into actionable insights.
-            </p>
-            <a
-              href="https://github.com/AvikarKhakh/nhl-standings-ML-model-dashboard"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-800 transition hover:text-black dark:text-gray-300 dark:hover:text-white"
+        <motion.div
+          className="glow-card rounded-xl p-6 md:p-8"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          custom={0}
+        >
+          <div className="mb-2 flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline">
+            <h3
+              className="text-xl text-[#f0ece2] md:text-2xl"
+              style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
             >
-              <FaGithub />
-              View on GitHub
-            </a>
-          </div>
-
-          {/* Investment Simulator */}
-          <div className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
-            <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-100">
-              Investment Strategy Simulator
+              Wake Forest University
             </h3>
-            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-blue-500 dark:text-blue-400">
-              Python &middot; Backtesting &middot; Data Analysis
-            </p>
-            <p className="flex-1 text-base text-gray-600 dark:text-gray-400">
-              Developed a backtesting simulator that lets users compare portfolio strategies over
-              historical market data with configurable assumptions and clear performance narratives.
-            </p>
-            <a
-              href="https://github.com/AvikarKhakh/portfolio-stategy-simulator"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-800 transition hover:text-black dark:text-gray-300 dark:hover:text-white"
-            >
-              <FaGithub />
-              View on GitHub
-            </a>
+            <span className="shrink-0 font-mono text-xs text-[#e8b931]/70">
+              May 2026
+            </span>
           </div>
-
-          {/* NBA Statistical Query Engine */}
-          <div className="flex flex-col rounded-lg border border-gray-200 bg-white p-6 shadow transition hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-900/50">
-            <h3 className="mb-2 text-xl font-bold text-gray-800 dark:text-gray-100">
-              NBA Statistical Query Engine
-            </h3>
-            <p className="mb-4 text-sm font-medium uppercase tracking-wide text-blue-500 dark:text-blue-400">
-              React &middot; FastAPI &middot; Llama 3.3 70B &middot; SQLite
-            </p>
-            <p className="flex-1 text-base text-gray-600 dark:text-gray-400">
-              Built a natural language-to-SQL web app that lets users query 9 seasons of NBA data
-              through plain English, returning interactive tables and auto-generated visualizations
-              powered by Llama 3.3 70B via Groq.
-            </p>
-            <a
-              href="https://github.com/AvikarKhakh/nba-SQL-engine"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gray-800 transition hover:text-black dark:text-gray-300 dark:hover:text-white"
-            >
-              <FaGithub />
-              View on GitHub
-            </a>
-          </div>
-        </div>
+          <p className="mb-1 text-[15px] italic text-[#8a8a9a]">
+            B.S. Computer Science, Minor in Economics
+          </p>
+          <p className="text-sm text-[#5a5a6a]">
+            Relevant Coursework: Data Structures &amp; Algorithms, Machine Learning,
+            Software Engineering, Computer Vision
+          </p>
+          <p className="mt-2 text-sm text-[#5a5a6a]">
+            Languages: English (fluent), Spanish (conversational), Punjabi (conversational)
+          </p>
+        </motion.div>
       </section>
 
-      {/* Footer back-to-top */}
-      <div className="flex justify-center py-10">
+      {/* ════════════ BACK TO TOP ════════════ */}
+      <div className="flex justify-center py-16">
         <a
           href="#top"
-          className="flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400"
+          className="font-mono text-xs uppercase tracking-widest text-[#5a5a6a] transition-colors duration-300 hover:text-[#e8b931]"
         >
-          <FaChevronUp className="text-xs" />
-          Back to top
+          &uarr; Back to top
         </a>
       </div>
     </div>

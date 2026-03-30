@@ -5,29 +5,31 @@ import MobileNav from "./MobileNav";
 import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
-  let headerClass =
-    "flex items-center w-full bg-white/80 backdrop-blur-md dark:bg-gray-950/80 justify-between py-6 px-2";
-  if (siteMetadata.stickyNav) {
-    headerClass += " sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-800/50";
-  }
+  const headerClass = [
+    "flex items-center w-full bg-[#08080c]/80 backdrop-blur-xl justify-between py-5 px-2",
+    siteMetadata.stickyNav ? "sticky top-0 z-50 border-b border-white/[0.04]" : "",
+  ].join(" ").trim();
 
   return (
     <header className={headerClass}>
       <Link href="/" aria-label={siteMetadata.headerTitle}>
-        <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+        <div
+          className="text-xl text-[#f0ece2] transition-colors duration-300 hover:text-[#e8b931]"
+          style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
+        >
           {siteMetadata.headerTitle}
         </div>
       </Link>
 
       <div className="flex items-center space-x-4 leading-5 sm:-mr-6 sm:space-x-6">
-        <div className="no-scrollbar hidden max-w-40 items-center gap-x-4 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
+        <div className="no-scrollbar hidden max-w-40 items-center gap-x-5 overflow-x-auto sm:flex md:max-w-72 lg:max-w-96">
           {headerNavLinks
             .filter((link) => link.href !== "/")
             .map((link) => (
               <Link
                 key={link.title}
                 href={link.href}
-                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-gray-900 dark:text-gray-100"
+                className="m-1 font-mono text-xs uppercase tracking-widest text-[#5a5a6a] transition-colors duration-300 hover:text-[#e8b931]"
               >
                 {link.title}
               </Link>

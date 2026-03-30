@@ -17,8 +17,8 @@ const projectsData: Project[] = [
     href: "https://github.com/AvikarKhakh/nhl-standings-ML-model-dashboard",
   },
   {
-    title: "Investment Strategy Simulator",
-    description: `Developed a backtesting simulator that lets users compare portfolio strategies over historical market data with configurable assumptions and clear performance narratives.`,
+    title: "Portfolio Strategy Simulator",
+    description: `Built a full-stack portfolio optimization tool (FastAPI, React, cvxpy) with configurable constraints for volatility, turnover, and tracking error. Features a backtesting engine with automatic constraint relaxation and an interactive React dashboard.`,
     href: "https://github.com/AvikarKhakh/portfolio-stategy-simulator",
   },
   {

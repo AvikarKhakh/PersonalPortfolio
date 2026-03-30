@@ -3,7 +3,7 @@ import "pliny/search/algolia.css";
 import "remark-github-blockquote-alert/alert.css";
 import "./globals.css";
 
-import { Space_Grotesk } from "next/font/google";
+import { Outfit, Instrument_Serif } from "next/font/google";
 import { Analytics, AnalyticsConfig } from "pliny/analytics";
 import { SearchProvider, SearchConfig } from "pliny/search";
 import Header from "@/components/Header";
@@ -13,13 +13,22 @@ import siteMetadata from "@/data/siteMetadata";
 import { ThemeProviders } from "./theme-providers";
 import { Metadata } from "next";
 
-const space_grotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-outfit",
 });
 
-export const metadata = {
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-instrument-serif",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteMetadata.siteUrl),
   title: "Avikar Khakh Portfolio",
   description: "A portfolio showcasing my projects and skills.",
 };
@@ -28,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const basePath = process.env.BASE_PATH || "";
 
   return (
-    <html lang="en" className={`${space_grotesk.variable} scroll-smooth`} suppressHydrationWarning>
+    <html lang="en" className={`${outfit.variable} ${instrumentSerif.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -59,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       </head>
-      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+      <body className="bg-[#08080c] pl-[calc(100vw-100%)] text-[#f0ece2] antialiased">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>

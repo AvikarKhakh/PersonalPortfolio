@@ -1,8 +1,173 @@
 body {
-  background-color: #ffffff;
+  background-color: #08080c;
+  color: #f0ece2;
 }
 
-.dark body,
-:where(.dark) body {
-  background-color: oklch(0.13 0.028 261.692);
+/* Grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #e8b931 0%, #f4845f 50%, #e8b931 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated gradient text */
+.gradient-text-animated {
+  background: linear-gradient(135deg, #e8b931 0%, #f4845f 50%, #e8b931 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+}
+
+/* Glow card hover effect */
+.glow-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent 40%, rgba(232, 185, 49, 0.3), rgba(244, 132, 95, 0.3), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glow-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px -15px rgba(232, 185, 49, 0.08);
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+/* Timeline line */
+.timeline-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(232, 185, 49, 0.3) 10%,
+    rgba(232, 185, 49, 0.15) 90%,
+    transparent
+  );
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -4px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #e8b931;
+  box-shadow: 0 0 12px rgba(232, 185, 49, 0.5);
+}
+
+/* Section divider */
+.section-label {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+/* Floating orb animations */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 25px) scale(0.97); }
+  66% { transform: translate(35px, -15px) scale(1.03); }
+}
+
+.orb-1 { animation: float-slow 15s ease-in-out infinite; }
+.orb-2 { animation: float-slower 20s ease-in-out infinite; }
+.orb-3 { animation: float-slow 18s ease-in-out infinite reverse; }
+
+/* Avatar glow ring */
+.avatar-ring {
+  position: relative;
+}
+
+.avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8b931, #f4845f, #e8b931);
+  background-size: 200% 200%;
+  animation: ring-rotate 4s linear infinite;
+  z-index: -1;
+}
+
+@keyframes ring-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Skill pill */
+.skill-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.skill-pill:hover {
+  background: rgba(232, 185, 49, 0.08);
+  border-color: rgba(232, 185, 49, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Accessibility: respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text-animated,
+  .orb-1, .orb-2, .orb-3,
+  .avatar-ring::before {
+    animation: none;
+  }
+
+  .glow-card,
+  .skill-pill {
+    transition: none;
+  }
 }
