@@ -41,7 +41,7 @@ const experience: ExperienceEntry[] = [
     company: "Steward",
     role: "Software Engineer",
     location: "Winston-Salem, NC",
-    date: "2025 \u2013 Present",
+    date: "Winter 2025 \u2013 Present",
     bullets: [
       { id: "steward-ios", content: <>Sole engineer for a <strong>WFU StartUp Lab-backed</strong> fintech startup (<strong>1 of 9</strong> selected), building a full-stack iOS app that recommends the optimal credit card at every merchant using real-time location</> },
       { id: "steward-engine", content: <>Developed a recommendation engine scoring cards across <strong>6 reward dimensions</strong> with fuzzy merchant name matching for accurate category detection</> },
@@ -66,7 +66,7 @@ const projects: ProjectEntry[] = [
     title: "Portfolio Strategy Simulator",
     tech: "Python \u00b7 FastAPI \u00b7 React \u00b7 cvxpy",
     description: "Full-stack portfolio optimization tool with configurable constraints for volatility, turnover, and tracking error. Features a backtesting engine with automatic constraint relaxation and an interactive React dashboard.",
-    href: "https://github.com/AvikarKhakh/portfolio-stategy-simulator",
+    href: "https://github.com/AvikarKhakh/portfolio-strategy-simulator",
   },
   {
     title: "NBA Statistical Query Engine",
