@@ -1,0 +1,137 @@
+/* Career, connected */
+.journey-section {
+  background: var(--dark);
+  color: #f1f0e6;
+  padding-block: 100px;
+}
+.journey-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 90px;
+  align-items: start;
+}
+.journey-intro {
+  position: sticky;
+  top: 150px;
+}
+.journey-section .section-label {
+  color: #b9c0ae;
+}
+.journey-section .section-label > span {
+  color: #fb815c;
+}
+.journey-intro h2 {
+  font-size: clamp(36px, 3.7vw, 54px);
+  line-height: 1.12;
+  letter-spacing: -1.9px;
+}
+.journey-intro h2 em {
+  color: #b7c2a6;
+}
+.journey-intro > p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #b4bba9;
+  margin-top: 24px;
+}
+.journey-motif {
+  font: 180px/0.95 var(--font-display);
+  color: #ef805c;
+  margin-top: 30px;
+  transform: rotate(-10deg);
+  width: 150px;
+}
+.journey-note {
+  color: #b4bba9;
+  font-size: 8px;
+  display: block;
+  margin-top: 24px;
+}
+.timeline {
+  position: relative;
+  padding-left: 38px;
+}
+.timeline-track {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 5px;
+  width: 1px;
+  background: #4a5342;
+}
+.timeline-progress {
+  height: 100%;
+  width: 2px;
+  background: #f1815c;
+  transform-origin: top;
+}
+.milestone {
+  padding-bottom: 55px;
+  position: relative;
+}
+.milestone-node {
+  position: absolute;
+  left: -42px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #a3b58f;
+  border-radius: 50%;
+  background: var(--dark);
+  box-shadow: 0 0 0 6px var(--dark);
+}
+.milestone-node.current {
+  background: #f1815c;
+  border-color: #f1815c;
+}
+.milestone-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #b5bca9;
+  font-size: 9px;
+}
+.milestone-meta > span:last-child {
+  color: #abb5a0;
+  font-size: 8px;
+}
+.milestone h3 {
+  font-size: 27px;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+  margin-top: 17px;
+}
+.milestone h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 22px;
+}
+.milestone-role {
+  color: #bdc4b1;
+  font-size: 11px;
+  margin-top: 6px;
+}
+.milestone > p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #abb4a0;
+  max-width: 460px;
+  margin-top: 16px;
+}
+.milestone-tags {
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  margin-top: 22px;
+  color: #b3bda7;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #434c3c;
+}
+.timeline-future {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #b4bda8;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 4px;
+}

@@ -1,10 +1,3 @@
-const { withContentlayer } = require("next-contentlayer2");
-const path = require("path");
-
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
@@ -55,52 +48,18 @@ const securityHeaders = [
   },
 ];
 
-const output = process.env.EXPORT ? "export" : undefined;
-const basePath = process.env.BASE_PATH || undefined;
-const unoptimized = process.env.UNOPTIMIZED ? true : undefined;
-
-/**
- * @type {import('next/dist/next-server/server/config').NextConfig}
- **/
-module.exports = () => {
-  const plugins = [withContentlayer, withBundleAnalyzer];
-  return plugins.reduce((acc, next) => next(acc), {
-    output,
-    basePath,
-    reactStrictMode: true,
-    trailingSlash: false,
-    pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-    eslint: {
-      dirs: ["app", "components", "layouts", "scripts"],
-    },
-    images: {
-      remotePatterns: [
-        {
-          protocol: "https",
-          hostname: "picsum.photos",
-        },
-      ],
-      unoptimized,
-    },
-    async headers() {
-      return [
-        {
-          source: "/(.*)",
-          headers: securityHeaders,
-        },
-      ];
-    },
-    webpack: (config, options) => {
-      config.resolve.alias["contentlayer/generated"] = path.join(
-        process.cwd(),
-        ".contentlayer/generated",
-      );
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      });
-
-      return config;
-    },
-  });
+module.exports = {
+  reactStrictMode: true,
+  trailingSlash: false,
+  async headers() {
+    return [{ source: "/(.*)", headers: securityHeaders }];
+  },
+  async redirects() {
+    return [
+      { source: "/about/:path*", destination: "/#about", permanent: true },
+      { source: "/projects/:path*", destination: "/#projects", permanent: true },
+      { source: "/blog/:path*", destination: "/#work", permanent: true },
+      { source: "/tags/:path*", destination: "/#work", permanent: true },
+    ];
+  },
 };

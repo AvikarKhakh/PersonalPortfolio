@@ -1,15 +1,9 @@
-import { MetadataRoute } from "next";
-import siteMetadata from "@/data/siteMetadata";
-
-export const dynamic = "force-static";
+import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      allow: "/",
-    },
-    sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
-    host: siteMetadata.siteUrl,
-  };
+    rules: { userAgent: '*', allow: '/' },
+    sitemap: 'https://avikarkhakh.com/sitemap.xml',
+    host: 'https://avikarkhakh.com',
+  }
 }
