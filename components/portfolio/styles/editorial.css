@@ -1,0 +1,286 @@
+/* Other work */
+.projects-section {
+  padding-block: 100px;
+}
+.projects-section .section-heading-row {
+  margin-bottom: 40px;
+}
+.project-list {
+  border-top: 1px solid var(--line);
+}
+.project-row {
+  display: grid;
+  grid-template-columns: 30px 180px 1fr 44px;
+  gap: 30px;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.project-number {
+  font: 10px var(--font-code);
+  color: var(--muted);
+  align-self: start;
+  padding-top: 7px;
+}
+.project-art {
+  aspect-ratio: 1.63;
+  background: #e4e7dc;
+  color: #5d704c;
+  overflow: hidden;
+}
+.project-art.query {
+  background: #e9dfd3;
+  color: #946e4c;
+}
+.project-art.robot {
+  background: #dfe6e8;
+  color: #57717a;
+}
+.project-art svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.45s;
+}
+.project-row:hover .project-art svg {
+  transform: scale(1.08);
+}
+.project-info .eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.8px;
+}
+.project-info h3 {
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  margin-top: 8px;
+}
+.project-info p {
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--muted);
+  margin-top: 8px;
+  max-width: 600px;
+}
+.project-stack {
+  font-size: 9px;
+  letter-spacing: 0;
+  color: var(--muted);
+  display: block;
+  margin-top: 15px;
+}
+.project-link {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.project-row:hover .project-link {
+  background: var(--ink);
+  color: var(--paper);
+}
+/* A person, not just a stack */
+.about-section {
+  padding-block: 0 110px;
+}
+.about-section > .section-label {
+  border-top: 1px solid var(--line);
+  padding-top: 60px;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: 100px;
+  align-items: center;
+}
+.portrait-wrap {
+  max-width: 350px;
+}
+.portrait {
+  position: relative;
+  background: #d9ded7;
+  padding: 12px;
+  transform: rotate(-2deg);
+}
+.portrait:before {
+  content: "";
+  width: 80px;
+  height: 24px;
+  position: absolute;
+  top: -8px;
+  left: calc(50% - 40px);
+  background: #e2d3b6a0;
+  transform: rotate(6deg);
+  z-index: 2;
+  backdrop-filter: blur(3px);
+}
+.portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.5s;
+}
+.portrait:hover img {
+  filter: grayscale(0);
+}
+.portrait-corner {
+  position: absolute;
+  bottom: -18px;
+  right: -18px;
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  background: var(--orange);
+  color: var(--paper);
+  font: 60px var(--font-display);
+  transform: rotate(2deg);
+}
+.portrait-caption {
+  margin-top: 29px;
+  font-size: 8px;
+  letter-spacing: 0.4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.portrait-caption > span:last-child {
+  font-size: 7px;
+  color: var(--muted);
+}
+.about-copy h2 {
+  font-size: 40px;
+  margin-bottom: 28px;
+}
+.about-copy > p {
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--muted);
+  margin-top: 17px;
+  max-width: 550px;
+}
+.toolkit {
+  margin-top: 32px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+}
+.toolkit > .eyebrow {
+  font-size: 8px;
+  display: block;
+  margin-bottom: 13px;
+}
+.toolkit > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #d5d6cb80;
+  font-size: 10px;
+}
+.toolkit strong {
+  font-weight: 600;
+}
+.toolkit > div > span {
+  color: var(--muted);
+  text-align: right;
+}
+/* The invitation */
+.contact-section {
+  background: #e9e8de;
+  border-top: 1px solid var(--line);
+  padding-top: 65px;
+}
+.contact-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+.contact-main h2 {
+  font-size: clamp(46px, 6.4vw, 91px);
+  letter-spacing: -4px;
+  line-height: 1.05;
+}
+.contact-main h2 em {
+  color: var(--orange);
+}
+.contact-round {
+  width: 104px;
+  height: 104px;
+  display: grid;
+  place-items: center;
+  background: var(--orange);
+  border-radius: 50%;
+  color: var(--paper);
+  flex-shrink: 0;
+  transition: background 0.25s;
+}
+.contact-round:hover {
+  background: var(--ink);
+}
+.contact-round .arrow {
+  width: 47px;
+  height: 47px;
+}
+.contact-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-start;
+  margin-top: 40px;
+  padding-bottom: 62px;
+}
+.email-link {
+  font-size: 18px;
+  letter-spacing: -0.4px;
+  border-bottom: 1px solid #909383;
+  padding-bottom: 5px;
+}
+.copy-email {
+  display: inline-flex;
+  background: transparent;
+  border: 0;
+  padding: 10px;
+  margin-left: 9px;
+  vertical-align: middle;
+}
+.copy-status {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 13px;
+  max-width: 440px;
+  line-height: 1.7;
+}
+.social-links {
+  display: flex;
+  gap: 30px;
+  padding-top: 8px;
+}
+.social-links a {
+  display: flex;
+  gap: 10px;
+  font-size: 11px;
+  align-items: center;
+}
+.social-links .arrow {
+  width: 15px;
+  height: 15px;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid #cfd1c4;
+  padding-block: 22px;
+  font-size: 8px;
+  letter-spacing: 0.7px;
+  color: var(--muted);
+}
+.footer-bottom a:hover {
+  color: var(--orange);
+}
