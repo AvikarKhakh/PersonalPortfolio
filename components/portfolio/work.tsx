@@ -37,6 +37,11 @@ function StewardFeature() {
             the ground up. Real-time merchant detection and rewards optimization
             help people choose the best card at checkout.
           </p>
+          <p className="feature-description">
+            Now available on the App Store with 100+ downloads and a growing
+            user base. We’ve secured investor funding and are closing additional
+            investment to support continued growth.
+          </p>
           <div className="feature-stack">
             SWIFT / PYTHON / FASTAPI / POSTGRESQL / TYPESCRIPT
           </div>

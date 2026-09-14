@@ -55,3 +55,5 @@ Guardian’s logo is sourced from the official [Guardian website](https://www.gu
 The timeline uses March 2026 for Steward (explicitly confirmed by Avikar), May 2026 for graduation, and July 2026 for Guardian. Steward’s technical ownership, team size, and platform details come from Avikar’s supplied background. Update both `work.tsx` and `journey.tsx` when changing role dates.
 
 The existing website is hosted on Vercel. This redesign has not yet been deployed; local changes and successful checks do not update the live site.
+
+Typography is bundled under `app/fonts` using `next/font/local`, so builds do not fetch Google Fonts. Font files are the Latin subsets from Google Fonts; the corresponding SIL Open Font Licenses are included alongside them.

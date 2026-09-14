@@ -11,7 +11,11 @@ test("shows current work and provides reachable one-page sections", async ({
     name: "Guardian Life Insurance logo",
   });
   await expect(guardianLogo).toBeVisible();
-  await expect.poll(() => guardianLogo.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await expect
+    .poll(() =>
+      guardianLogo.evaluate((image: HTMLImageElement) => image.naturalWidth),
+    )
+    .toBeGreaterThan(0);
   await expect(
     page.getByText(/associate software engineer/i).first(),
   ).toBeVisible();
@@ -64,29 +68,14 @@ test("fits the viewport and remains usable with reduced motion", async ({
   expect(dimensions.page).toBeLessThanOrEqual(dimensions.viewport);
 });
 
-test("visitors can pause and resume decorative animations", async ({
+test("decorative animations run automatically without a playback control", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  await page.getByRole("button", { name: "Pause animations" }).click();
-  await expect(page.locator(".portfolio")).toHaveAttribute(
-    "data-motion",
-    "paused",
-  );
-  await expect(page.locator(".orbit-satellite").first()).toHaveCSS(
-    "animation-play-state",
-    "paused",
-  );
-  await page.locator("#journey").scrollIntoViewIfNeeded();
-  await expect(page.locator(".timeline-progress")).toHaveCSS(
-    "transform",
-    "matrix(1, 0, 0, 1, 0, 0)",
-  );
   await expect(
-    page.getByRole("button", { name: "Resume animations" }),
-  ).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "Resume animations" }).click();
+    page.getByRole("button", { name: /Pause animations|Resume animations/ }),
+  ).toHaveCount(0);
   await expect(page.locator(".portfolio")).toHaveAttribute(
     "data-motion",
     "running",

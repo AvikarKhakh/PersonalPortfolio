@@ -1,22 +1,42 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Instrument_Serif, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const sans = Manrope({
-  subsets: ["latin"],
+const sans = localFont({
+  src: "./fonts/manrope-normal-200-800.woff2",
+  weight: "200 800",
   display: "swap",
   variable: "--font-sans",
 });
-const serif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+const serif = localFont({
+  src: [
+    {
+      path: "./fonts/instrument-serif-normal-400.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/instrument-serif-italic-400.woff2",
+      weight: "400",
+      style: "italic",
+    },
+  ],
   display: "swap",
   variable: "--font-serif",
 });
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const mono = localFont({
+  src: [
+    {
+      path: "./fonts/ibm-plex-mono-normal-400.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/ibm-plex-mono-normal-500.woff2",
+      weight: "500",
+      style: "normal",
+    },
+  ],
   display: "swap",
   variable: "--font-mono",
 });

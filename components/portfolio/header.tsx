@@ -1,13 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Arrow } from "./motion";
-export function Header({
-  paused,
-  onToggleMotion,
-}: {
-  paused: boolean;
-  onToggleMotion: () => void;
-}) {
+export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
@@ -38,37 +32,6 @@ export function Header({
           </a>
         </nav>
         <div className="header-controls">
-          <button
-            className="motion-toggle"
-            type="button"
-            aria-label={paused ? "Resume animations" : "Pause animations"}
-            aria-pressed={paused}
-            onClick={onToggleMotion}
-          >
-            {paused ? (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                aria-hidden="true"
-              >
-                <path d="m4 2 8 5-8 5Z" fill="currentColor" />
-              </svg>
-            ) : (
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                aria-hidden="true"
-              >
-                <path
-                  d="M4 2v10M10 2v10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-              </svg>
-            )}
-          </button>
           <button
             className="menu-toggle"
             aria-expanded={open}

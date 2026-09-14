@@ -200,20 +200,7 @@ a:hover .diagonal {
   padding-block: 10px;
 }
 .header-controls {
-  display: flex;
-  gap: 12px;
-}
-.motion-toggle {
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: transparent;
-  display: grid;
-  place-items: center;
-}
-.motion-toggle:hover {
-  background: #e8e7dd;
+  display: none;
 }
 .menu-toggle {
   display: none;

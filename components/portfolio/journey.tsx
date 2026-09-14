@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
-import { Reveal, SectionLabel, useMotionPaused } from "./motion";
+import { Reveal, SectionLabel, useSystemReducedMotion } from "./motion";
 const milestones = [
   {
     date: "2024",
@@ -30,7 +30,7 @@ const milestones = [
     place: "Steward",
     role: "Technical Cofounder & Engineering Lead",
     description:
-      "Co-founded Steward and built its full-stack platform from the ground up. Now leading 2 engineering interns, evolving the rewards engine, and taking the iOS app through TestFlight and App Store submission prep.",
+      "Co-founded Steward and built its full-stack platform from the ground up. Launched on the App Store with 100+ downloads and a growing user base. Leading 2 engineering interns and continuing to develop the app and rewards engine.",
     tags: "TECHNICAL OWNERSHIP / TEAM LEADERSHIP / FINTECH",
     current: true,
   },
@@ -58,7 +58,7 @@ const milestones = [
 ] as const;
 export function Journey() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduced = useMotionPaused();
+  const reduced = useSystemReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 65%", "end 70%"],

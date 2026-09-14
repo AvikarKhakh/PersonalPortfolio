@@ -1,11 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import {
-  createContext,
-  useContext,
-  useSyncExternalStore,
-  type ReactNode,
-} from "react";
+import { useSyncExternalStore, type ReactNode } from "react";
 const motionQuery = "(prefers-reduced-motion: reduce)";
 function subscribeToMotion(onChange: () => void) {
   const query = window.matchMedia(motionQuery);
@@ -19,12 +14,6 @@ export function useSystemReducedMotion() {
     () => false,
   );
 }
-export const MotionPausedContext = createContext(false);
-export function useMotionPaused() {
-  const paused = useContext(MotionPausedContext);
-  const reduced = useSystemReducedMotion();
-  return paused || Boolean(reduced);
-}
 export function Reveal({
   children,
   className = "",
@@ -34,7 +23,7 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const reduced = useMotionPaused();
+  const reduced = useSystemReducedMotion();
   return (
     <motion.div
       className={`reveal ${className}`}

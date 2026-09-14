@@ -16,9 +16,6 @@ export function About() {
               height={948}
               sizes="(max-width: 700px) 85vw, 360px"
             />
-            <span className="portrait-corner" aria-hidden="true">
-              ↗
-            </span>
           </div>
           <div className="portrait-caption">
             <span>AVIKAR KHAKH</span>

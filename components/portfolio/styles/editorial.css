@@ -100,45 +100,16 @@
   max-width: 350px;
 }
 .portrait {
-  position: relative;
-  background: #d9ded7;
-  padding: 12px;
-  transform: rotate(-2deg);
-}
-.portrait:before {
-  content: "";
-  width: 80px;
-  height: 24px;
-  position: absolute;
-  top: -8px;
-  left: calc(50% - 40px);
-  background: #e2d3b6a0;
-  transform: rotate(6deg);
-  z-index: 2;
-  backdrop-filter: blur(3px);
+  background: #e6e8df;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
 }
 .portrait img {
   width: 100%;
   height: auto;
   display: block;
-  filter: grayscale(100%);
-  transition: filter 0.5s;
-}
-.portrait:hover img {
-  filter: grayscale(0);
-}
-.portrait-corner {
-  position: absolute;
-  bottom: -18px;
-  right: -18px;
-  width: 70px;
-  height: 70px;
-  display: grid;
-  place-items: center;
-  background: var(--orange);
-  color: var(--paper);
-  font: 60px var(--font-display);
-  transform: rotate(2deg);
+  border-radius: 6px;
 }
 .portrait-caption {
   margin-top: 29px;
